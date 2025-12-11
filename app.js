@@ -8,7 +8,7 @@ const state = {
     dartsThrown: 0,
     modifier: 1,
     history: [],
-    startingScore: 501,
+    startingScore: 301,
     selectedNames: []
 };
 
@@ -172,7 +172,7 @@ function updateScoreButtonLabels() {
         const baseValue = parseInt(btn.dataset.value);
 
         if (baseValue === 0) {
-            btn.textContent = 'Miss (0)';
+            btn.textContent = 'Miss';
         } else if (baseValue === 25) {
             if (state.modifier === 3) {
                 btn.textContent = '50';
@@ -294,10 +294,10 @@ function handleNextPlayer() {
 function handleReset() {
     // Reset selections
     state.selectedNames = [];
-    state.startingScore = 501;
+    state.startingScore = 301;
     nameBtns.forEach(btn => btn.classList.remove('selected'));
     modeBtns.forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.score === '501');
+        btn.classList.toggle('active', btn.dataset.score === '301');
     });
     updatePlayerList();
 

@@ -7,14 +7,18 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: #0051ba;
-    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
     color: #111;
 }
 
 .container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 1vh 15px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .container.hidden {
@@ -22,10 +26,14 @@ body {
 }
 
 /* Setup Screen */
+#setupScreen {
+    justify-content: center;
+}
+
 .setup-section {
     background: #fff;
     border-radius: 8px;
-    padding: 30px;
+    padding: 20px;
     max-width: 800px;
     margin: 0 auto;
 }
@@ -33,26 +41,26 @@ body {
 .setup-section h2 {
     text-align: center;
     color: #0051ba;
-    margin-bottom: 10px;
-    font-size: 2rem;
+    margin-bottom: 8px;
+    font-size: 1.8rem;
 }
 
 .setup-hint {
     text-align: center;
     color: #666;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .name-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    margin-bottom: 30px;
+    gap: 8px;
+    margin-bottom: 20px;
 }
 
 .name-btn {
-    padding: 25px 15px;
-    font-size: 1.3rem;
+    padding: 18px 12px;
+    font-size: 1.2rem;
     font-weight: bold;
     border: 3px solid #0051ba;
     border-radius: 8px;
@@ -74,20 +82,20 @@ body {
 }
 
 .selected-players {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .selected-players h3 {
     color: #111;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .player-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    min-height: 50px;
-    padding: 15px;
+    gap: 8px;
+    min-height: 40px;
+    padding: 10px;
     background: #f5f5f5;
     border-radius: 8px;
 }
@@ -100,10 +108,10 @@ body {
 .player-tag {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     background: #0051ba;
     color: #fff;
-    padding: 10px 15px;
+    padding: 8px 12px;
     border-radius: 20px;
     font-weight: bold;
 }
@@ -112,7 +120,7 @@ body {
     background: none;
     border: none;
     color: #fff;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     cursor: pointer;
     padding: 0;
     line-height: 1;
@@ -124,12 +132,12 @@ body {
 }
 
 .game-mode {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .game-mode h3 {
     color: #111;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .mode-buttons {
@@ -139,8 +147,8 @@ body {
 
 .mode-btn {
     flex: 1;
-    padding: 20px;
-    font-size: 1.5rem;
+    padding: 15px;
+    font-size: 1.3rem;
     font-weight: bold;
     border: 3px solid #0051ba;
     border-radius: 8px;
@@ -164,8 +172,8 @@ body {
 .start-btn {
     display: block;
     width: 100%;
-    padding: 25px;
-    font-size: 1.5rem;
+    padding: 18px;
+    font-size: 1.4rem;
     font-weight: bold;
     border: none;
     border-radius: 8px;
@@ -187,26 +195,32 @@ body {
     cursor: not-allowed;
 }
 
+/* Game Screen */
 header h1 {
     text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 20px;
+    font-size: clamp(1.2rem, 3vh, 2rem);
+    margin-bottom: 1vh;
     color: #ffda1a;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
 }
 
 .score-display {
     display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-    gap: 20px;
+    justify-content: center;
+    margin-bottom: 1vh;
+    gap: 10px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
 }
 
 .player {
     flex: 1;
+    min-width: 120px;
+    max-width: 200px;
     background: #fff;
     border-radius: 8px;
-    padding: 20px;
+    padding: 1vh 12px;
     text-align: center;
     transition: all 0.3s ease;
     border: 3px solid transparent;
@@ -219,30 +233,32 @@ header h1 {
 }
 
 .player h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+    font-size: clamp(0.9rem, 2vh, 1.2rem);
+    margin-bottom: 0.5vh;
     color: #111;
 }
 
 .player .score {
-    font-size: 4rem;
+    font-size: clamp(1.5rem, 5vh, 3rem);
     font-weight: bold;
     color: #0051ba;
+    line-height: 1;
 }
 
 .player .current-throw {
-    font-size: 1.2rem;
+    font-size: clamp(0.7rem, 1.5vh, 1rem);
     color: #666;
-    margin-top: 10px;
+    margin-top: 0.5vh;
 }
 
 .active-indicator {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 1vh;
     display: flex;
     justify-content: center;
-    gap: 40px;
-    font-size: 1.3rem;
+    gap: 30px;
+    font-size: clamp(0.9rem, 2vh, 1.3rem);
+    flex-shrink: 0;
 }
 
 #activePlayer {
@@ -257,13 +273,14 @@ header h1 {
 .modifiers {
     display: flex;
     justify-content: center;
-    gap: 15px;
-    margin-bottom: 20px;
+    gap: 10px;
+    margin-bottom: 1vh;
+    flex-shrink: 0;
 }
 
 .modifier-btn {
-    padding: 20px 40px;
-    font-size: 1.3rem;
+    padding: 1.5vh 3vw;
+    font-size: clamp(0.9rem, 2vh, 1.3rem);
     font-weight: bold;
     border: 3px solid #003d8f;
     border-radius: 8px;
@@ -271,7 +288,7 @@ header h1 {
     color: #111;
     cursor: pointer;
     transition: all 0.2s ease;
-    min-width: 150px;
+    min-width: 100px;
 }
 
 .modifier-btn:hover {
@@ -297,22 +314,26 @@ header h1 {
 .number-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: 6px;
+    margin-bottom: 1vh;
+    flex: 1;
+    min-height: 0;
 }
 
 .score-btn {
-    padding: 30px 20px;
-    font-size: 2rem;
+    padding: 0;
+    font-size: clamp(1.2rem, 3vh, 2rem);
     font-weight: bold;
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     background: #ffda1a;
     color: #111;
     cursor: pointer;
     transition: all 0.15s ease;
-    min-height: 80px;
     touch-action: manipulation;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .score-btn:hover {
@@ -325,10 +346,21 @@ header h1 {
     background: #e6c400;
 }
 
+.special-btns {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 1vh;
+    flex-shrink: 0;
+}
+
+.special-btns .score-btn {
+    flex: 1;
+    padding: 2vh 0;
+}
+
 .score-btn.bull {
     background: #111;
     color: #ffda1a;
-    grid-column: span 2;
 }
 
 .score-btn.bull:hover {
@@ -336,26 +368,26 @@ header h1 {
 }
 
 .score-btn.miss {
-    background: #fff;
-    color: #111;
-    border: 3px solid #ccc;
-    grid-column: span 3;
+    background: #e53935;
+    color: #fff;
+    border: none;
 }
 
 .score-btn.miss:hover {
-    background: #f0f0f0;
+    background: #f44336;
 }
 
 .controls {
     display: flex;
     justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
+    gap: 10px;
+    flex-shrink: 0;
+    padding-bottom: 1vh;
 }
 
 .control-btn {
-    padding: 20px 50px;
-    font-size: 1.3rem;
+    padding: 1.5vh 4vw;
+    font-size: clamp(0.9rem, 2vh, 1.2rem);
     font-weight: bold;
     border: none;
     border-radius: 8px;
@@ -405,7 +437,7 @@ header h1 {
 }
 
 .winner-overlay h2 {
-    font-size: 4rem;
+    font-size: clamp(2rem, 8vh, 4rem);
     color: #ffda1a;
     margin-bottom: 30px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
@@ -428,42 +460,10 @@ header h1 {
     background: #ffe54c;
 }
 
-/* Responsive design for widescreen */
-@media (min-width: 1200px) {
-    .number-grid {
-        grid-template-columns: repeat(7, 1fr);
-    }
-
-    .score-btn {
-        padding: 40px 30px;
-        font-size: 2.5rem;
-        min-height: 100px;
-    }
-
-    .score-btn.bull {
-        grid-column: span 2;
-    }
-
-    .score-btn.miss {
-        grid-column: span 2;
-    }
-
-    .modifier-btn {
-        padding: 25px 50px;
-        font-size: 1.5rem;
-        min-width: 180px;
-    }
-}
-
 /* Tablet/Touch optimization */
 @media (max-width: 768px) {
     .number-grid {
         grid-template-columns: repeat(4, 1fr);
-    }
-
-    .score-btn.bull,
-    .score-btn.miss {
-        grid-column: span 2;
     }
 
     .score-display {
@@ -488,12 +488,9 @@ header h1 {
     }
 }
 
-/* Many players - smaller cards */
-.score-display {
-    flex-wrap: wrap;
-}
-
-.score-display .player {
-    min-width: 150px;
-    flex: 1;
+/* Landscape widescreen optimization */
+@media (min-aspect-ratio: 16/9) {
+    .number-grid {
+        grid-template-columns: repeat(10, 1fr);
+    }
 }
