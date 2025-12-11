@@ -1,0 +1,499 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0051ba;
+    min-height: 100vh;
+    color: #111;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.container.hidden {
+    display: none;
+}
+
+/* Setup Screen */
+.setup-section {
+    background: #fff;
+    border-radius: 8px;
+    padding: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.setup-section h2 {
+    text-align: center;
+    color: #0051ba;
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+
+.setup-hint {
+    text-align: center;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.name-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.name-btn {
+    padding: 25px 15px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border: 3px solid #0051ba;
+    border-radius: 8px;
+    background: #fff;
+    color: #0051ba;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    touch-action: manipulation;
+}
+
+.name-btn:hover {
+    background: #f0f0f0;
+}
+
+.name-btn.selected {
+    background: #ffda1a;
+    border-color: #111;
+    color: #111;
+}
+
+.selected-players {
+    margin-bottom: 20px;
+}
+
+.selected-players h3 {
+    color: #111;
+    margin-bottom: 10px;
+}
+
+.player-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-height: 50px;
+    padding: 15px;
+    background: #f5f5f5;
+    border-radius: 8px;
+}
+
+.no-players {
+    color: #999;
+    font-style: italic;
+}
+
+.player-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #0051ba;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.remove-player {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    opacity: 0.8;
+}
+
+.remove-player:hover {
+    opacity: 1;
+}
+
+.game-mode {
+    margin-bottom: 20px;
+}
+
+.game-mode h3 {
+    color: #111;
+    margin-bottom: 10px;
+}
+
+.mode-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.mode-btn {
+    flex: 1;
+    padding: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: 3px solid #0051ba;
+    border-radius: 8px;
+    background: #fff;
+    color: #0051ba;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    touch-action: manipulation;
+}
+
+.mode-btn:hover {
+    background: #f0f0f0;
+}
+
+.mode-btn.active {
+    background: #ffda1a;
+    border-color: #111;
+    color: #111;
+}
+
+.start-btn {
+    display: block;
+    width: 100%;
+    padding: 25px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    background: #ffda1a;
+    color: #111;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    touch-action: manipulation;
+}
+
+.start-btn:hover:not(:disabled) {
+    background: #ffe54c;
+    transform: scale(1.02);
+}
+
+.start-btn:disabled {
+    background: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+header h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #ffda1a;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.score-display {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.player {
+    flex: 1;
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+}
+
+.player.active {
+    background: #ffda1a;
+    border-color: #111;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.player h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #111;
+}
+
+.player .score {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #0051ba;
+}
+
+.player .current-throw {
+    font-size: 1.2rem;
+    color: #666;
+    margin-top: 10px;
+}
+
+.active-indicator {
+    text-align: center;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    font-size: 1.3rem;
+}
+
+#activePlayer {
+    color: #ffda1a;
+    font-weight: bold;
+}
+
+#dartsLeft {
+    color: #fff;
+}
+
+.modifiers {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.modifier-btn {
+    padding: 20px 40px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border: 3px solid #003d8f;
+    border-radius: 8px;
+    background: #fff;
+    color: #111;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 150px;
+}
+
+.modifier-btn:hover {
+    background: #f0f0f0;
+}
+
+.modifier-btn.active {
+    border-color: #111;
+    background: #ffda1a;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#doubleBtn.active {
+    border-color: #111;
+    background: #ffda1a;
+}
+
+#tripleBtn.active {
+    border-color: #111;
+    background: #ffda1a;
+}
+
+.number-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.score-btn {
+    padding: 30px 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    background: #ffda1a;
+    color: #111;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    min-height: 80px;
+    touch-action: manipulation;
+}
+
+.score-btn:hover {
+    background: #ffe54c;
+    transform: scale(1.02);
+}
+
+.score-btn:active {
+    transform: scale(0.98);
+    background: #e6c400;
+}
+
+.score-btn.bull {
+    background: #111;
+    color: #ffda1a;
+    grid-column: span 2;
+}
+
+.score-btn.bull:hover {
+    background: #333;
+}
+
+.score-btn.miss {
+    background: #fff;
+    color: #111;
+    border: 3px solid #ccc;
+    grid-column: span 3;
+}
+
+.score-btn.miss:hover {
+    background: #f0f0f0;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.control-btn {
+    padding: 20px 50px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    touch-action: manipulation;
+}
+
+.control-btn {
+    background: #fff;
+    color: #0051ba;
+    border: 3px solid #0051ba;
+}
+
+.control-btn:hover {
+    background: #f0f0f0;
+    transform: scale(1.02);
+}
+
+.control-btn:active {
+    transform: scale(0.98);
+}
+
+.control-btn.reset {
+    background: #111;
+    color: #fff;
+    border: 3px solid #111;
+}
+
+.control-btn.reset:hover {
+    background: #333;
+}
+
+/* Winner overlay */
+.winner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 81, 186, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.winner-overlay h2 {
+    font-size: 4rem;
+    color: #ffda1a;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.winner-overlay button {
+    padding: 25px 60px;
+    font-size: 1.5rem;
+    background: #ffda1a;
+    color: #111;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: bold;
+}
+
+.winner-overlay button:hover {
+    transform: scale(1.05);
+    background: #ffe54c;
+}
+
+/* Responsive design for widescreen */
+@media (min-width: 1200px) {
+    .number-grid {
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+    .score-btn {
+        padding: 40px 30px;
+        font-size: 2.5rem;
+        min-height: 100px;
+    }
+
+    .score-btn.bull {
+        grid-column: span 2;
+    }
+
+    .score-btn.miss {
+        grid-column: span 2;
+    }
+
+    .modifier-btn {
+        padding: 25px 50px;
+        font-size: 1.5rem;
+        min-width: 180px;
+    }
+}
+
+/* Tablet/Touch optimization */
+@media (max-width: 768px) {
+    .number-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .score-btn.bull,
+    .score-btn.miss {
+        grid-column: span 2;
+    }
+
+    .score-display {
+        flex-wrap: wrap;
+    }
+
+    .score-display .player {
+        min-width: calc(50% - 10px);
+    }
+
+    .modifiers {
+        flex-wrap: wrap;
+    }
+
+    .modifier-btn {
+        flex: 1;
+        min-width: 100px;
+    }
+
+    .name-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Many players - smaller cards */
+.score-display {
+    flex-wrap: wrap;
+}
+
+.score-display .player {
+    min-width: 150px;
+    flex: 1;
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darts Counter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Player Selection Screen -->
+    <div class="container" id="setupScreen">
+        <header>
+            <h1>Darts Counter</h1>
+        </header>
+
+        <div class="setup-section">
+            <h2>Select Players</h2>
+            <p class="setup-hint">Tap names to add players (in playing order)</p>
+
+            <div class="name-grid">
+                <button class="name-btn" data-name="Leo">Leo</button>
+                <button class="name-btn" data-name="Alex">Alex</button>
+                <button class="name-btn" data-name="Jakob">Jakob</button>
+                <button class="name-btn" data-name="Philip">Philip</button>
+                <button class="name-btn" data-name="Patrick">Patrick</button>
+                <button class="name-btn" data-name="Elisabeth">Elisabeth</button>
+                <button class="name-btn" data-name="Bernhard">Bernhard</button>
+                <button class="name-btn" data-name="Thomas">Thomas</button>
+            </div>
+
+            <div class="selected-players">
+                <h3>Playing Order:</h3>
+                <div id="playerList" class="player-list">
+                    <span class="no-players">No players selected</span>
+                </div>
+            </div>
+
+            <div class="game-mode">
+                <h3>Starting Score:</h3>
+                <div class="mode-buttons">
+                    <button class="mode-btn" data-score="301">301</button>
+                    <button class="mode-btn active" data-score="501">501</button>
+                </div>
+            </div>
+
+            <button class="start-btn" id="startGameBtn" disabled>Start Game</button>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div class="container hidden" id="gameScreen">
+        <header>
+            <h1>Darts Counter</h1>
+        </header>
+
+        <div class="score-display" id="scoreDisplay">
+            <!-- Players will be dynamically generated -->
+        </div>
+
+        <div class="active-indicator">
+            <span id="activePlayer">Player 1's Turn</span>
+            <span id="dartsLeft">Darts: 3</span>
+        </div>
+
+        <div class="modifiers">
+            <button class="modifier-btn" id="singleBtn" data-modifier="1">Single (×1)</button>
+            <button class="modifier-btn" id="doubleBtn" data-modifier="2">Double (×2)</button>
+            <button class="modifier-btn" id="tripleBtn" data-modifier="3">Triple (×3)</button>
+        </div>
+
+        <div class="number-grid">
+            <button class="score-btn" data-value="1">1</button>
+            <button class="score-btn" data-value="2">2</button>
+            <button class="score-btn" data-value="3">3</button>
+            <button class="score-btn" data-value="4">4</button>
+            <button class="score-btn" data-value="5">5</button>
+            <button class="score-btn" data-value="6">6</button>
+            <button class="score-btn" data-value="7">7</button>
+            <button class="score-btn" data-value="8">8</button>
+            <button class="score-btn" data-value="9">9</button>
+            <button class="score-btn" data-value="10">10</button>
+            <button class="score-btn" data-value="11">11</button>
+            <button class="score-btn" data-value="12">12</button>
+            <button class="score-btn" data-value="13">13</button>
+            <button class="score-btn" data-value="14">14</button>
+            <button class="score-btn" data-value="15">15</button>
+            <button class="score-btn" data-value="16">16</button>
+            <button class="score-btn" data-value="17">17</button>
+            <button class="score-btn" data-value="18">18</button>
+            <button class="score-btn" data-value="19">19</button>
+            <button class="score-btn" data-value="20">20</button>
+            <button class="score-btn bull" data-value="25">Bull (25)</button>
+            <button class="score-btn miss" data-value="0">Miss (0)</button>
+        </div>
+
+        <div class="controls">
+            <button class="control-btn" id="undoBtn">Undo</button>
+            <button class="control-btn" id="nextPlayerBtn">Next Player</button>
+            <button class="control-btn reset" id="resetBtn">New Game</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
