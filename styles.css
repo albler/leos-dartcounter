@@ -6,10 +6,10 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #0051ba;
+    background: #1a1a2e;
     height: 100vh;
     overflow: hidden;
-    color: #111;
+    color: #fff;
 }
 
 .container {
@@ -25,13 +25,118 @@ body {
     display: none;
 }
 
+/* Session Screen */
+#sessionScreen {
+    justify-content: center;
+    background: #1a1a2e;
+}
+
+.session-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.session-btn {
+    flex: 1;
+    padding: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: 3px solid #4a9eff;
+    border-radius: 8px;
+    background: #2d2d44;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    touch-action: manipulation;
+}
+
+.session-btn:hover {
+    background: #3d3d54;
+}
+
+.session-btn.create {
+    background: #4a9eff;
+    border-color: #4a9eff;
+    color: #fff;
+}
+
+.session-btn.create:hover {
+    background: #6ab0ff;
+}
+
+.join-section {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.join-section h3 {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.session-input {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.5rem;
+    text-align: center;
+    border: 3px solid #4a9eff;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    font-weight: bold;
+    background: #2d2d44;
+    color: #fff;
+}
+
+.session-input:focus {
+    outline: none;
+    border-color: #6ab0ff;
+}
+
+.connection-status {
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    background: #2d2d44;
+    color: #fff;
+}
+
+.connection-status.connected {
+    background: #2e7d32;
+    color: #fff;
+}
+
+.connection-status.error {
+    background: #c62828;
+    color: #fff;
+}
+
+.session-code-display {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #4a9eff;
+    margin-top: 5px;
+}
+
+.session-code-display span {
+    font-weight: bold;
+    letter-spacing: 2px;
+    background: rgba(74, 158, 255, 0.2);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
 /* Setup Screen */
 #setupScreen {
     justify-content: center;
+    background: #1a1a2e;
 }
 
 .setup-section {
-    background: #fff;
+    background: #2d2d44;
     border-radius: 8px;
     padding: 20px;
     max-width: 800px;
@@ -40,14 +145,14 @@ body {
 
 .setup-section h2 {
     text-align: center;
-    color: #0051ba;
+    color: #4a9eff;
     margin-bottom: 8px;
     font-size: 1.8rem;
 }
 
 .setup-hint {
     text-align: center;
-    color: #666;
+    color: #aaa;
     margin-bottom: 15px;
 }
 
@@ -62,23 +167,23 @@ body {
     padding: 18px 12px;
     font-size: 1.2rem;
     font-weight: bold;
-    border: 3px solid #0051ba;
+    border: 3px solid #4a9eff;
     border-radius: 8px;
-    background: #fff;
-    color: #0051ba;
+    background: #3d3d54;
+    color: #fff;
     cursor: pointer;
     transition: all 0.2s ease;
     touch-action: manipulation;
 }
 
 .name-btn:hover {
-    background: #f0f0f0;
+    background: #4d4d64;
 }
 
 .name-btn.selected {
-    background: #ffda1a;
-    border-color: #111;
-    color: #111;
+    background: #4a9eff;
+    border-color: #6ab0ff;
+    color: #fff;
 }
 
 .selected-players {
@@ -86,7 +191,7 @@ body {
 }
 
 .selected-players h3 {
-    color: #111;
+    color: #fff;
     margin-bottom: 8px;
 }
 
@@ -96,12 +201,12 @@ body {
     gap: 8px;
     min-height: 40px;
     padding: 10px;
-    background: #f5f5f5;
+    background: #3d3d54;
     border-radius: 8px;
 }
 
 .no-players {
-    color: #999;
+    color: #888;
     font-style: italic;
 }
 
@@ -109,7 +214,7 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: #0051ba;
+    background: #4a9eff;
     color: #fff;
     padding: 8px 12px;
     border-radius: 20px;
@@ -136,7 +241,7 @@ body {
 }
 
 .game-mode h3 {
-    color: #111;
+    color: #fff;
     margin-bottom: 8px;
 }
 
@@ -150,23 +255,23 @@ body {
     padding: 15px;
     font-size: 1.3rem;
     font-weight: bold;
-    border: 3px solid #0051ba;
+    border: 3px solid #4a9eff;
     border-radius: 8px;
-    background: #fff;
-    color: #0051ba;
+    background: #3d3d54;
+    color: #fff;
     cursor: pointer;
     transition: all 0.2s ease;
     touch-action: manipulation;
 }
 
 .mode-btn:hover {
-    background: #f0f0f0;
+    background: #4d4d64;
 }
 
 .mode-btn.active {
-    background: #ffda1a;
-    border-color: #111;
-    color: #111;
+    background: #4a9eff;
+    border-color: #6ab0ff;
+    color: #fff;
 }
 
 .start-btn {
@@ -177,34 +282,43 @@ body {
     font-weight: bold;
     border: none;
     border-radius: 8px;
-    background: #ffda1a;
-    color: #111;
+    background: #4a9eff;
+    color: #fff;
     cursor: pointer;
     transition: all 0.2s ease;
     touch-action: manipulation;
 }
 
 .start-btn:hover:not(:disabled) {
-    background: #ffe54c;
+    background: #6ab0ff;
     transform: scale(1.02);
 }
 
 .start-btn:disabled {
-    background: #ccc;
-    color: #666;
+    background: #555;
+    color: #888;
     cursor: not-allowed;
 }
 
 /* Game Screen */
+#gameScreen {
+    background: #1a1a2e;
+}
+
 header h1 {
     text-align: center;
     font-size: clamp(1.2rem, 3vh, 2rem);
-    margin-bottom: 1vh;
-    color: #ffda1a;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 0.5vh;
+    color: #fff;
     flex-shrink: 0;
 }
 
+header h1 .version {
+    color: #4a9eff;
+    font-size: 0.7em;
+}
+
+/* Player Score Display */
 .score-display {
     display: flex;
     justify-content: center;
@@ -218,7 +332,7 @@ header h1 {
     flex: 1;
     min-width: 120px;
     max-width: 200px;
-    background: #fff;
+    background: #2d2d44;
     border-radius: 8px;
     padding: 1vh 12px;
     text-align: center;
@@ -227,97 +341,117 @@ header h1 {
 }
 
 .player.active {
-    background: #ffda1a;
-    border-color: #111;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    background: #3d3d54;
+    border-color: #4a9eff;
+    box-shadow: 0 4px 12px rgba(74, 158, 255, 0.3);
 }
 
 .player h2 {
     font-size: clamp(0.9rem, 2vh, 1.2rem);
     margin-bottom: 0.5vh;
-    color: #111;
+    color: #fff;
 }
 
 .player .score {
     font-size: clamp(1.5rem, 5vh, 3rem);
     font-weight: bold;
-    color: #0051ba;
+    color: #4a9eff;
     line-height: 1;
 }
 
 .player .current-throw {
     font-size: clamp(0.7rem, 1.5vh, 1rem);
-    color: #666;
+    color: #888;
     margin-top: 0.5vh;
 }
 
-.active-indicator {
-    text-align: center;
-    margin-bottom: 1vh;
+/* Dart Tracker */
+.dart-tracker {
     display: flex;
     justify-content: center;
-    gap: 30px;
-    font-size: clamp(0.9rem, 2vh, 1.3rem);
+    gap: 15px;
+    margin-bottom: 1.5vh;
     flex-shrink: 0;
 }
 
-#activePlayer {
-    color: #ffda1a;
-    font-weight: bold;
+.dart-slot {
+    background: #2d2d44;
+    border-radius: 8px;
+    padding: 8px 20px;
+    text-align: center;
+    min-width: 100px;
+    border: 2px solid #3d3d54;
 }
 
-#dartsLeft {
+.dart-slot.filled {
+    border-color: #4a9eff;
+    background: #3d3d54;
+}
+
+.dart-label {
+    display: block;
+    font-size: 0.7rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.dart-value {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
     color: #fff;
 }
 
+/* Game Input Area - 3 column layout */
+.game-input-area {
+    display: flex;
+    gap: 10px;
+    flex: 1;
+    min-height: 0;
+    margin-bottom: 1vh;
+}
+
+/* Modifiers - Left column */
 .modifiers {
     display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 1vh;
+    flex-direction: column;
+    gap: 8px;
+    width: 100px;
     flex-shrink: 0;
 }
 
 .modifier-btn {
-    padding: 1.5vh 3vw;
-    font-size: clamp(0.9rem, 2vh, 1.3rem);
+    flex: 1;
+    padding: 10px;
+    font-size: clamp(0.8rem, 1.8vh, 1.1rem);
     font-weight: bold;
-    border: 3px solid #003d8f;
+    border: 3px solid #3d3d54;
     border-radius: 8px;
-    background: #fff;
-    color: #111;
+    background: #2d2d44;
+    color: #fff;
     cursor: pointer;
     transition: all 0.2s ease;
-    min-width: 100px;
+    touch-action: manipulation;
 }
 
 .modifier-btn:hover {
-    background: #f0f0f0;
+    background: #3d3d54;
 }
 
 .modifier-btn.active {
-    border-color: #111;
-    background: #ffda1a;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-color: #4a9eff;
+    background: #4a9eff;
+    color: #fff;
 }
 
-#doubleBtn.active {
-    border-color: #111;
-    background: #ffda1a;
-}
-
-#tripleBtn.active {
-    border-color: #111;
-    background: #ffda1a;
-}
-
+/* Number Grid - Center */
 .number-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 6px;
-    margin-bottom: 1vh;
     flex: 1;
-    min-height: 0;
 }
 
 .score-btn {
@@ -326,8 +460,8 @@ header h1 {
     font-weight: bold;
     border: none;
     border-radius: 6px;
-    background: #ffda1a;
-    color: #111;
+    background: #4a9eff;
+    color: #fff;
     cursor: pointer;
     transition: all 0.15s ease;
     touch-action: manipulation;
@@ -337,46 +471,40 @@ header h1 {
 }
 
 .score-btn:hover {
-    background: #ffe54c;
+    background: #6ab0ff;
     transform: scale(1.02);
 }
 
 .score-btn:active {
     transform: scale(0.98);
-    background: #e6c400;
+    background: #3a8eef;
 }
 
-.special-btns {
+/* Bull Buttons - Right column */
+.bull-buttons {
     display: flex;
-    gap: 6px;
-    margin-bottom: 1vh;
+    flex-direction: column;
+    gap: 8px;
+    width: 80px;
     flex-shrink: 0;
 }
 
-.special-btns .score-btn {
+.bull-buttons .score-btn {
     flex: 1;
-    padding: 2vh 0;
+    background: #2d2d44;
+    border: 3px solid #4a9eff;
 }
 
-.score-btn.bull {
-    background: #111;
-    color: #ffda1a;
+.bull-buttons .score-btn:hover {
+    background: #3d3d54;
 }
 
-.score-btn.bull:hover {
-    background: #333;
+.bull-buttons .score-btn.bull50 {
+    background: #4a9eff;
+    border-color: #4a9eff;
 }
 
-.score-btn.miss {
-    background: #e53935;
-    color: #fff;
-    border: none;
-}
-
-.score-btn.miss:hover {
-    background: #f44336;
-}
-
+/* Bottom Controls */
 .controls {
     display: flex;
     justify-content: center;
@@ -386,7 +514,8 @@ header h1 {
 }
 
 .control-btn {
-    padding: 1.5vh 4vw;
+    flex: 1;
+    padding: 2vh 20px;
     font-size: clamp(0.9rem, 2vh, 1.2rem);
     font-weight: bold;
     border: none;
@@ -396,29 +525,32 @@ header h1 {
     touch-action: manipulation;
 }
 
-.control-btn {
-    background: #fff;
-    color: #0051ba;
-    border: 3px solid #0051ba;
-}
-
-.control-btn:hover {
-    background: #f0f0f0;
-    transform: scale(1.02);
-}
-
-.control-btn:active {
-    transform: scale(0.98);
-}
-
-.control-btn.reset {
-    background: #111;
+.control-btn.miss {
+    background: #e53935;
     color: #fff;
-    border: 3px solid #111;
 }
 
-.control-btn.reset:hover {
-    background: #333;
+.control-btn.miss:hover {
+    background: #f44336;
+}
+
+.control-btn.undo {
+    background: #2d2d44;
+    color: #fff;
+    border: 3px solid #4a9eff;
+}
+
+.control-btn.undo:hover {
+    background: #3d3d54;
+}
+
+.control-btn.newgame {
+    background: #43a047;
+    color: #fff;
+}
+
+.control-btn.newgame:hover {
+    background: #4caf50;
 }
 
 /* Winner overlay */
@@ -428,7 +560,7 @@ header h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 81, 186, 0.95);
+    background: rgba(26, 26, 46, 0.95);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -438,7 +570,7 @@ header h1 {
 
 .winner-overlay h2 {
     font-size: clamp(2rem, 8vh, 4rem);
-    color: #ffda1a;
+    color: #4a9eff;
     margin-bottom: 30px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
@@ -446,8 +578,8 @@ header h1 {
 .winner-overlay button {
     padding: 25px 60px;
     font-size: 1.5rem;
-    background: #ffda1a;
-    color: #111;
+    background: #43a047;
+    color: #fff;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -457,7 +589,7 @@ header h1 {
 
 .winner-overlay button:hover {
     transform: scale(1.05);
-    background: #ffe54c;
+    background: #4caf50;
 }
 
 /* Tablet/Touch optimization */
@@ -475,16 +607,24 @@ header h1 {
     }
 
     .modifiers {
-        flex-wrap: wrap;
+        width: 80px;
     }
 
-    .modifier-btn {
-        flex: 1;
-        min-width: 100px;
+    .bull-buttons {
+        width: 60px;
     }
 
     .name-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dart-tracker {
+        gap: 8px;
+    }
+
+    .dart-slot {
+        min-width: 80px;
+        padding: 6px 12px;
     }
 }
 
