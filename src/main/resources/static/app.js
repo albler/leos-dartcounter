@@ -93,6 +93,84 @@ const availableNames = ['Leo', 'Alex', 'Jakob', 'Philip', 'Patrick', 'Elisabeth'
 // Checkout suggestions tables
 // Format: array of darts needed, e.g., ['T20', 'T20', 'D20'] for 170
 
+// Single Out checkout table (can finish on any number)
+const singleOutTable = {
+    180: ['T20', 'T20', 'T20'],
+    177: ['T20', 'T19', 'T20'],
+    174: ['T20', 'T18', 'T20'],
+    171: ['T20', 'T17', 'T20'],
+    168: ['T20', 'T16', 'T20'],
+    165: ['T19', 'T18', 'T20'],
+    162: ['T20', 'T14', 'T20'],
+    159: ['T20', 'T13', 'T20'],
+    156: ['T20', 'T12', 'T20'],
+    153: ['T20', 'T11', 'T20'],
+    150: ['T20', 'T10', 'T20'],
+    147: ['T20', 'T9', 'T20'],
+    144: ['T20', 'T8', 'T20'],
+    141: ['T20', 'T7', 'T20'],
+    138: ['T20', 'T6', 'T20'],
+    135: ['T20', 'T5', 'T20'],
+    132: ['T20', 'T4', 'T20'],
+    129: ['T20', 'T3', 'T20'],
+    126: ['T20', 'T2', 'T20'],
+    123: ['T20', 'T1', 'T20'],
+    120: ['T20', 'T20'],
+    117: ['T20', 'T19'],
+    114: ['T20', 'T18'],
+    111: ['T20', 'T17'],
+    108: ['T20', 'T16'],
+    105: ['T20', 'T15'],
+    102: ['T20', 'T14'],
+    99: ['T20', 'T13'],
+    96: ['T20', 'T12'],
+    93: ['T20', 'T11'],
+    90: ['T20', 'T10'],
+    87: ['T20', 'T9'],
+    84: ['T20', 'T8'],
+    81: ['T20', 'T7'],
+    78: ['T20', 'T6'],
+    75: ['T20', 'T5'],
+    72: ['T20', 'T4'],
+    69: ['T20', 'T3'],
+    66: ['T20', 'T2'],
+    63: ['T20', 'T1'],
+    60: ['T20'],
+    57: ['T19'],
+    54: ['T18'],
+    51: ['T17'],
+    48: ['T16'],
+    45: ['T15'],
+    42: ['T14'],
+    39: ['T13'],
+    36: ['T12'],
+    33: ['T11'],
+    30: ['T10'],
+    27: ['T9'],
+    24: ['T8'],
+    21: ['T7'],
+    20: ['S20'],
+    19: ['S19'],
+    18: ['T6'],
+    17: ['S17'],
+    16: ['S16'],
+    15: ['T5'],
+    14: ['S14'],
+    13: ['S13'],
+    12: ['T4'],
+    11: ['S11'],
+    10: ['S10'],
+    9: ['T3'],
+    8: ['S8'],
+    7: ['S7'],
+    6: ['T2'],
+    5: ['S5'],
+    4: ['S4'],
+    3: ['T1'],
+    2: ['S2'],
+    1: ['S1']
+};
+
 // Double Out checkout table (must finish on a double)
 const doubleOutTable = {
     170: ['T20', 'T20', 'D25'],
@@ -694,7 +772,12 @@ const SetupScreen = {
 
                 <div class="game-mode">
                     <h3>Out Mode:</h3>
-                    <div class="mode-buttons">
+                    <div class="mode-buttons out-mode-buttons">
+                        <button
+                            class="mode-btn"
+                            :class="{ active: outMode === 'single' }"
+                            @click="outMode = 'single'"
+                        >Single Out</button>
                         <button
                             class="mode-btn"
                             :class="{ active: outMode === 'double' }"
@@ -726,7 +809,7 @@ const SetupScreen = {
 
         const selectedNames = ref([]);
         const startingScore = ref(301);
-        const outMode = ref('double');
+        const outMode = ref('single');
         const sessionCode = ref('');
         const statusMessage = ref('');
         const statusClass = ref('');
@@ -906,19 +989,32 @@ const GameScreen = {
         const winner = ref(null);
         const currentTurnThrows = ref([]);
         const qrCodeRef = ref(null);
-        const outMode = ref(localStorage.getItem('outMode') || 'double');
+        const outMode = ref(localStorage.getItem('outMode') || 'single');
 
         const ws = createWebSocketService();
 
         // Get checkout suggestion for current player
         const getCheckoutSuggestion = (score, dartsRemaining) => {
-            const isTripleOut = outMode.value === 'triple';
-            const maxCheckout = isTripleOut ? 180 : 170;
-            const minCheckout = isTripleOut ? 3 : 2;
+            const mode = outMode.value;
+            let maxCheckout, minCheckout, table;
+
+            if (mode === 'single') {
+                maxCheckout = 180;
+                minCheckout = 1;
+                table = singleOutTable;
+            } else if (mode === 'triple') {
+                maxCheckout = 180;
+                minCheckout = 3;
+                table = tripleOutTable;
+            } else {
+                // double out
+                maxCheckout = 170;
+                minCheckout = 2;
+                table = doubleOutTable;
+            }
 
             if (score < minCheckout || score > maxCheckout) return null;
 
-            const table = isTripleOut ? tripleOutTable : doubleOutTable;
             const checkout = table[score];
             if (!checkout) return null;
 

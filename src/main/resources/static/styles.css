@@ -308,6 +308,11 @@ body {
     color: #fff;
 }
 
+.out-mode-buttons .mode-btn {
+    padding: 12px 8px;
+    font-size: 1rem;
+}
+
 .start-btn {
     display: block;
     width: 100%;
