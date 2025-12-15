@@ -5,9 +5,9 @@ const { createRouter, createWebHistory } = VueRouter;
 const API_BASE_URL = '/api';
 const WS_URL = '/ws';
 
-// Auth0 Configuration - Replace with your Auth0 tenant details
-const AUTH0_DOMAIN = 'YOUR_AUTH0_DOMAIN';  // e.g., 'your-tenant.auth0.com'
-const AUTH0_CLIENT_ID = 'YOUR_AUTH0_CLIENT_ID';
+// Auth0 Configuration
+const AUTH0_DOMAIN = 'bettermeetingrooms.eu.auth0.com';
+const AUTH0_CLIENT_ID = 'A0yAyZtRjjcySiKzhZnny9fAKe1jK6KI';
 const AUTH0_AUDIENCE = 'https://api.leos-dartcounter.com';
 
 // ============== Auth0 Service ==============
