@@ -8,9 +8,11 @@ const WS_URL = '/ws';
 // Available player names
 const availableNames = ['Leo', 'Alex', 'Jakob', 'Philip', 'Patrick', 'Elisabeth', 'Bernhard', 'Thomas'];
 
-// Checkout suggestions table (score -> suggested checkout)
+// Checkout suggestions tables
 // Format: array of darts needed, e.g., ['T20', 'T20', 'D20'] for 170
-const checkoutTable = {
+
+// Double Out checkout table (must finish on a double)
+const doubleOutTable = {
     170: ['T20', 'T20', 'D25'],
     167: ['T20', 'T19', 'D25'],
     164: ['T20', 'T18', 'D25'],
@@ -173,6 +175,70 @@ const checkoutTable = {
     4: ['D2'],
     3: ['S1', 'D1'],
     2: ['D1']
+};
+
+// Triple Out checkout table (must finish on a triple)
+const tripleOutTable = {
+    180: ['T20', 'T20', 'T20'],
+    177: ['T20', 'T19', 'T20'],
+    174: ['T20', 'T18', 'T20'],
+    171: ['T20', 'T17', 'T20'],
+    168: ['T20', 'T16', 'T20'],
+    165: ['T19', 'T18', 'T20'],
+    162: ['T20', 'T14', 'T20'],
+    159: ['T20', 'T13', 'T20'],
+    156: ['T20', 'T12', 'T20'],
+    153: ['T20', 'T11', 'T20'],
+    150: ['T20', 'T10', 'T20'],
+    147: ['T20', 'T9', 'T20'],
+    144: ['T20', 'T8', 'T20'],
+    141: ['T20', 'T7', 'T20'],
+    138: ['T20', 'T6', 'T20'],
+    135: ['T20', 'T5', 'T20'],
+    132: ['T20', 'T4', 'T20'],
+    129: ['T20', 'T3', 'T20'],
+    126: ['T20', 'T2', 'T20'],
+    123: ['T20', 'T1', 'T20'],
+    120: ['T20', 'T20'],
+    117: ['T20', 'T19'],
+    114: ['T20', 'T18'],
+    111: ['T20', 'T17'],
+    108: ['T20', 'T16'],
+    105: ['T20', 'T15'],
+    102: ['T20', 'T14'],
+    99: ['T20', 'T13'],
+    96: ['T20', 'T12'],
+    93: ['T20', 'T11'],
+    90: ['T20', 'T10'],
+    87: ['T20', 'T9'],
+    84: ['T20', 'T8'],
+    81: ['T20', 'T7'],
+    78: ['T20', 'T6'],
+    75: ['T20', 'T5'],
+    72: ['T20', 'T4'],
+    69: ['T20', 'T3'],
+    66: ['T20', 'T2'],
+    63: ['T20', 'T1'],
+    60: ['T20'],
+    57: ['T19'],
+    54: ['T18'],
+    51: ['T17'],
+    48: ['T16'],
+    45: ['T15'],
+    42: ['T14'],
+    39: ['T13'],
+    36: ['T12'],
+    33: ['T11'],
+    30: ['T10'],
+    27: ['T9'],
+    24: ['T8'],
+    21: ['T7'],
+    18: ['T6'],
+    15: ['T5'],
+    12: ['T4'],
+    9: ['T3'],
+    6: ['T2'],
+    3: ['T1']
 };
 
 // ============== API Service ==============
@@ -410,6 +476,22 @@ const SetupScreen = {
                     </div>
                 </div>
 
+                <div class="game-mode">
+                    <h3>Out Mode:</h3>
+                    <div class="mode-buttons">
+                        <button
+                            class="mode-btn"
+                            :class="{ active: outMode === 'double' }"
+                            @click="outMode = 'double'"
+                        >Double Out</button>
+                        <button
+                            class="mode-btn"
+                            :class="{ active: outMode === 'triple' }"
+                            @click="outMode = 'triple'"
+                        >Triple Out</button>
+                    </div>
+                </div>
+
                 <button
                     class="start-btn"
                     :disabled="selectedNames.length < 2"
@@ -428,6 +510,7 @@ const SetupScreen = {
 
         const selectedNames = ref([]);
         const startingScore = ref(301);
+        const outMode = ref('double');
         const sessionCode = ref('');
         const statusMessage = ref('');
         const statusClass = ref('');
@@ -456,6 +539,9 @@ const SetupScreen = {
             statusClass.value = '';
 
             try {
+                // Save out mode to localStorage for the game screen
+                localStorage.setItem('outMode', outMode.value);
+
                 // Create session
                 const gameState = await api.createSession(selectedNames.value, startingScore.value);
                 sessionCode.value = gameState.sessionCode;
@@ -495,6 +581,7 @@ const SetupScreen = {
             availableNames,
             selectedNames,
             startingScore,
+            outMode,
             sessionCode,
             statusMessage,
             statusClass,
@@ -603,14 +690,20 @@ const GameScreen = {
         const winner = ref(null);
         const currentTurnThrows = ref([]);
         const qrCodeRef = ref(null);
+        const outMode = ref(localStorage.getItem('outMode') || 'double');
 
         const ws = createWebSocketService();
 
         // Get checkout suggestion for current player
         const getCheckoutSuggestion = (score, dartsRemaining) => {
-            if (score < 2 || score > 170) return null;
+            const isTripleOut = outMode.value === 'triple';
+            const maxCheckout = isTripleOut ? 180 : 170;
+            const minCheckout = isTripleOut ? 3 : 2;
 
-            const checkout = checkoutTable[score];
+            if (score < minCheckout || score > maxCheckout) return null;
+
+            const table = isTripleOut ? tripleOutTable : doubleOutTable;
+            const checkout = table[score];
             if (!checkout) return null;
 
             // Check if we have enough darts for this checkout
@@ -633,7 +726,8 @@ const GameScreen = {
 
             return {
                 score: player.score,
-                darts: suggestion
+                darts: suggestion,
+                mode: outMode.value
             };
         });
 
