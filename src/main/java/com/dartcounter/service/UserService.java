@@ -25,11 +25,18 @@ public class UserService {
         String auth0Id = jwt.getSubject();
         String email = jwt.getClaimAsString("email");
         String name = jwt.getClaimAsString("name");
+        String nickname = jwt.getClaimAsString("nickname");
         String picture = jwt.getClaimAsString("picture");
 
-        // Use email as name fallback
+        // Build display name from available claims
         if (name == null || name.isBlank()) {
-            name = email != null ? email.split("@")[0] : "Player";
+            if (nickname != null && !nickname.isBlank()) {
+                name = nickname;
+            } else if (email != null && !email.isBlank()) {
+                name = email.split("@")[0];
+            } else {
+                name = "Player";
+            }
         }
 
         Optional<User> existingUser = userRepository.findByAuth0Id(auth0Id);
@@ -38,6 +45,10 @@ public class UserService {
             User user = existingUser.get();
             user.updateLastLogin();
             user.updateProfile(name, picture);
+            // Update email if we now have one
+            if (email != null && user.getEmail() == null) {
+                user.setEmail(email);
+            }
             return userRepository.save(user);
         }
 

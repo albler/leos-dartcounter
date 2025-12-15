@@ -22,8 +22,8 @@ public class User {
     @Column(nullable = false, unique = true)
     private String auth0Id;  // The 'sub' claim from Auth0 JWT
 
-    @Column(nullable = false)
-    private String email;
+    @Column
+    private String email;  // May be null depending on Auth0 connection
 
     @Column(nullable = false)
     private String name;
