@@ -5,12 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Darts Counter</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- WebSocket Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
 </head>
 <body>
-    <!-- Player Selection Screen -->
-    <div class="container" id="setupScreen">
+    <!-- Session Mode Screen -->
+    <div class="container" id="sessionScreen">
         <header>
             <h1>Darts Counter</h1>
+        </header>
+
+        <div class="setup-section">
+            <h2>Game Session</h2>
+            <p class="setup-hint">Play with friends on multiple devices</p>
+
+            <div class="session-buttons">
+                <button class="session-btn create" id="createSessionBtn">Create New Game</button>
+                <button class="session-btn join" id="joinSessionBtn">Join Game</button>
+            </div>
+
+            <div class="join-section hidden" id="joinSection">
+                <h3>Enter Session Code:</h3>
+                <input type="text" id="sessionCodeInput" class="session-input" maxlength="6" placeholder="ABC123" autocapitalize="characters">
+                <button class="start-btn" id="confirmJoinBtn">Join</button>
+            </div>
+
+            <div class="connection-status hidden" id="connectionStatus">
+                <span id="statusText">Connecting...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Player Selection Screen -->
+    <div class="container hidden" id="setupScreen">
+        <header>
+            <h1>Darts Counter</h1>
+            <div class="session-code-display" id="setupSessionCode">
+                Session: <span id="setupCurrentCode">------</span>
+            </div>
         </header>
 
         <div class="setup-section">
@@ -50,56 +83,71 @@
     <!-- Game Screen -->
     <div class="container hidden" id="gameScreen">
         <header>
-            <h1>Darts Counter</h1>
+            <h1>DART TOP <span class="version">3.5</span></h1>
+            <div class="session-code-display" id="sessionCodeDisplay">
+                Session: <span id="currentSessionCode">------</span>
+            </div>
         </header>
 
         <div class="score-display" id="scoreDisplay">
             <!-- Players will be dynamically generated -->
         </div>
 
-        <div class="active-indicator">
-            <span id="activePlayer">Player 1's Turn</span>
-            <span id="dartsLeft">Darts: 3</span>
+        <div class="dart-tracker">
+            <div class="dart-slot" id="dart1">
+                <span class="dart-label">DART 1</span>
+                <span class="dart-value">-</span>
+            </div>
+            <div class="dart-slot" id="dart2">
+                <span class="dart-label">DART 2</span>
+                <span class="dart-value">-</span>
+            </div>
+            <div class="dart-slot" id="dart3">
+                <span class="dart-label">DART 3</span>
+                <span class="dart-value">-</span>
+            </div>
         </div>
 
-        <div class="modifiers">
-            <button class="modifier-btn" id="singleBtn" data-modifier="1">Single (×1)</button>
-            <button class="modifier-btn" id="doubleBtn" data-modifier="2">Double (×2)</button>
-            <button class="modifier-btn" id="tripleBtn" data-modifier="3">Triple (×3)</button>
-        </div>
+        <div class="game-input-area">
+            <div class="modifiers">
+                <button class="modifier-btn active" id="singleBtn" data-modifier="1">Single</button>
+                <button class="modifier-btn" id="doubleBtn" data-modifier="2">Double</button>
+                <button class="modifier-btn" id="tripleBtn" data-modifier="3">Triple</button>
+            </div>
 
-        <div class="number-grid">
-            <button class="score-btn" data-value="1">1</button>
-            <button class="score-btn" data-value="2">2</button>
-            <button class="score-btn" data-value="3">3</button>
-            <button class="score-btn" data-value="4">4</button>
-            <button class="score-btn" data-value="5">5</button>
-            <button class="score-btn" data-value="6">6</button>
-            <button class="score-btn" data-value="7">7</button>
-            <button class="score-btn" data-value="8">8</button>
-            <button class="score-btn" data-value="9">9</button>
-            <button class="score-btn" data-value="10">10</button>
-            <button class="score-btn" data-value="11">11</button>
-            <button class="score-btn" data-value="12">12</button>
-            <button class="score-btn" data-value="13">13</button>
-            <button class="score-btn" data-value="14">14</button>
-            <button class="score-btn" data-value="15">15</button>
-            <button class="score-btn" data-value="16">16</button>
-            <button class="score-btn" data-value="17">17</button>
-            <button class="score-btn" data-value="18">18</button>
-            <button class="score-btn" data-value="19">19</button>
-            <button class="score-btn" data-value="20">20</button>
-        </div>
+            <div class="number-grid">
+                <button class="score-btn" data-value="1">1</button>
+                <button class="score-btn" data-value="2">2</button>
+                <button class="score-btn" data-value="3">3</button>
+                <button class="score-btn" data-value="4">4</button>
+                <button class="score-btn" data-value="5">5</button>
+                <button class="score-btn" data-value="6">6</button>
+                <button class="score-btn" data-value="7">7</button>
+                <button class="score-btn" data-value="8">8</button>
+                <button class="score-btn" data-value="9">9</button>
+                <button class="score-btn" data-value="10">10</button>
+                <button class="score-btn" data-value="11">11</button>
+                <button class="score-btn" data-value="12">12</button>
+                <button class="score-btn" data-value="13">13</button>
+                <button class="score-btn" data-value="14">14</button>
+                <button class="score-btn" data-value="15">15</button>
+                <button class="score-btn" data-value="16">16</button>
+                <button class="score-btn" data-value="17">17</button>
+                <button class="score-btn" data-value="18">18</button>
+                <button class="score-btn" data-value="19">19</button>
+                <button class="score-btn" data-value="20">20</button>
+            </div>
 
-        <div class="special-btns">
-            <button class="score-btn bull" data-value="25">25</button>
-            <button class="score-btn miss" data-value="0">Miss</button>
+            <div class="bull-buttons">
+                <button class="score-btn bull" data-value="25">25</button>
+                <button class="score-btn bull50" data-value="50">50</button>
+            </div>
         </div>
 
         <div class="controls">
-            <button class="control-btn" id="undoBtn">Undo</button>
-            <button class="control-btn" id="nextPlayerBtn">Next Player</button>
-            <button class="control-btn reset" id="resetBtn">New Game</button>
+            <button class="control-btn miss" id="missBtn" data-value="0">✕ Miss</button>
+            <button class="control-btn undo" id="undoBtn">↩ Undo</button>
+            <button class="control-btn newgame" id="resetBtn">New Game</button>
         </div>
     </div>
 
