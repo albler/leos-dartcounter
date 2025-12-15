@@ -126,19 +126,20 @@ body {
 
 .session-code-display .qr-wrapper {
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: 160px;
+    height: 160px;
     background: #fff;
-    border-radius: 8px;
-    padding: 6px;
+    border-radius: 10px;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .session-code-display .qr-code {
-    width: 88px;
-    height: 88px;
+    width: 140px;
+    height: 140px;
 }
 
 .session-code-display .qr-code img,
@@ -153,12 +154,12 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     font-weight: bold;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
+    font-size: 1rem;
+    letter-spacing: 2px;
     color: #333;
     background: #fff;
-    padding: 2px 6px;
-    border-radius: 3px;
+    padding: 4px 10px;
+    border-radius: 4px;
 }
 
 /* Setup Screen */
@@ -708,5 +709,142 @@ header h1 .version {
     .control-btn {
         padding: 15px 25px;
         min-width: 100px;
+    }
+}
+
+/* iPhone / Small mobile optimization */
+@media (max-width: 480px) {
+    .container {
+        padding: 1vh 8px;
+    }
+
+    /* Stack modifiers horizontally above the number grid */
+    .game-input-area {
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 2vh;
+    }
+
+    .modifiers {
+        flex-direction: row;
+        width: 100%;
+        gap: 6px;
+    }
+
+    .modifier-btn {
+        flex: 1;
+        padding: 12px 8px;
+        font-size: 1rem;
+    }
+
+    /* 5 column grid for better button size on phones */
+    .number-grid {
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        gap: 6px;
+    }
+
+    /* Re-position buttons for 5-column layout */
+    .score-btn:nth-child(1) { grid-column: 1; grid-row: 1; }
+    .score-btn:nth-child(2) { grid-column: 2; grid-row: 1; }
+    .score-btn:nth-child(3) { grid-column: 3; grid-row: 1; }
+    .score-btn:nth-child(4) { grid-column: 4; grid-row: 1; }
+    .score-btn:nth-child(5) { grid-column: 5; grid-row: 1; }
+
+    .score-btn:nth-child(6) { grid-column: 1; grid-row: 2; }
+    .score-btn:nth-child(7) { grid-column: 2; grid-row: 2; }
+    .score-btn:nth-child(8) { grid-column: 3; grid-row: 2; }
+    .score-btn:nth-child(9) { grid-column: 4; grid-row: 2; }
+    .score-btn:nth-child(10) { grid-column: 5; grid-row: 2; }
+
+    .score-btn:nth-child(11) { grid-column: 1; grid-row: 3; }
+    .score-btn:nth-child(12) { grid-column: 2; grid-row: 3; }
+    .score-btn:nth-child(13) { grid-column: 3; grid-row: 3; }
+    .score-btn:nth-child(14) { grid-column: 4; grid-row: 3; }
+    .score-btn:nth-child(15) { grid-column: 5; grid-row: 3; }
+
+    .score-btn:nth-child(16) { grid-column: 1; grid-row: 4; }
+    .score-btn:nth-child(17) { grid-column: 2; grid-row: 4; }
+    .score-btn:nth-child(18) { grid-column: 3; grid-row: 4; }
+    .score-btn:nth-child(19) { grid-column: 4; grid-row: 4; }
+    .score-btn:nth-child(20) { grid-column: 5; grid-row: 4; }
+
+    /* Bull container spans full width on row 5 */
+    .bull-container {
+        grid-column: 1 / -1;
+        grid-row: 5;
+        flex-direction: row;
+        gap: 6px;
+    }
+
+    .bull-container .score-btn.bull {
+        padding: 12px;
+        font-size: 1rem;
+    }
+
+    .score-btn {
+        font-size: 1.1rem;
+        min-height: 48px;
+    }
+
+    /* Compact dart tracker */
+    .dart-tracker {
+        gap: 6px;
+        margin-bottom: 2vh;
+    }
+
+    .dart-slot {
+        min-width: 60px;
+        padding: 4px 8px;
+    }
+
+    .dart-label {
+        font-size: 0.7rem;
+    }
+
+    .dart-value {
+        font-size: 1rem;
+    }
+
+    /* Compact score display */
+    .score-display {
+        margin-bottom: 2vh;
+        gap: 6px;
+    }
+
+    .player {
+        min-width: calc(50% - 6px);
+        padding: 8px;
+    }
+
+    .player .score {
+        font-size: 1.8rem;
+    }
+
+    /* Stack control buttons */
+    .controls {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 1vh 0;
+    }
+
+    .control-btn {
+        padding: 12px 16px;
+        min-width: calc(50% - 4px);
+        font-size: 0.95rem;
+    }
+
+    .control-btn.newgame {
+        min-width: 100%;
+        order: 3;
+    }
+
+    /* Hide QR code on very small screens */
+    .session-code-display {
+        display: none;
+    }
+
+    header h1 {
+        font-size: 1.1rem;
     }
 }

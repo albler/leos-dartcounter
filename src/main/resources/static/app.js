@@ -437,8 +437,8 @@ const GameScreen = {
                 qrCodeRef.value.innerHTML = '';
                 new QRCode(qrCodeRef.value, {
                     text: gameUrl,
-                    width: 88,
-                    height: 88,
+                    width: 140,
+                    height: 140,
                     colorDark: '#333',
                     colorLight: '#fff',
                     correctLevel: QRCode.CorrectLevel.H
